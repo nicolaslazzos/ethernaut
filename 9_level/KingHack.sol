@@ -5,10 +5,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
 
-// define a contract without a callback 
-// call the king contract claiming the throne
-// because of no fallback function, the king contract will fail to reclaim the throne when trying to transfer
-// it should be used the return value of the transfer function
+// define a contract without a fallback 
+// call the king contract through this contract, claiming the throne
+// because of the no fallback function, the king contract will fail to reclaim the throne when trying to transfer
+// it should be used the return value of the transfer function to revert() the trnasaction if fails
 
 contract KingHack {
     function claim(address king) public payable {
