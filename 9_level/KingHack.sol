@@ -6,9 +6,9 @@
 pragma solidity ^0.6.0;
 
 // define a contract without a fallback 
-// call the king contract through this contract, claiming the throne
+// call the king contract through this contract, claiming the throne (send the original contract address as the param)
 // because of the no fallback function, the king contract will fail to reclaim the throne when trying to transfer
-// it should be used the return value of the transfer function to revert() the trnasaction if fails
+// it should be used the return value of the transfer function to revert() the transaction if fails
 
 contract KingHack {
     function claim(address king) public payable {
