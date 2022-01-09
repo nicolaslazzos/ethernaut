@@ -13,6 +13,8 @@ pragma solidity ^0.6.0;
 // an address is an hexadecimal number of 20 bytes, so to correctly cast it to a uint256
 // we need to first cast it to uint160, because 160 bits = 20 bytes
 
+// when creating libraries, use library, not contract, to ensure libraries will not modify caller storage data when caller uses delegatecall.
+
 contract HackPreservation {
     address public slot1;
     address public slot2;
