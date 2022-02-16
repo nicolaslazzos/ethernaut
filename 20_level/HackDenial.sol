@@ -12,7 +12,7 @@ import "./SafeMath.sol";
 // basically to deny the owner from withdrawing the funds, you need to consume all the gas
 // in the call(), to cause the function to be out of gas preventing it to execute the remaining instructions
 // thats possible because no gas amount is specified in the call() function, so we can create
-// a contract with a fallback function that consumes all the gas when calling it
+// a contract with a fallback function that consumes all the gas when calling it (you should specify a fixed amount of gas)
 
 // we use assert(false) in the fallback because that function compiles to 0xfe, 
 // which is an invalid opcode, using up all remaining gas, and reverting all changes
