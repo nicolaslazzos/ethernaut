@@ -42,7 +42,7 @@ contract HackAlienCodex {
 
         uint256 index = uint256(2)**uint256(256) - uint256(keccak256(abi.encodePacked(uint256(1))));
 
-        // bytes and strings are right padded, but we need our value to be left padded, so the address stay ar right
+        // bytes and strings are right padded, but we need our value to be left padded, so the address stay at right
         // for that, we first cast the address to uint256 and then to bytes32
         bytes32 content = bytes32(uint256(uint160(msg.sender)));
 
